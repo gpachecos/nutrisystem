@@ -172,6 +172,24 @@
 
 	}
 
+	function carregarOpcoesFicha($tabela,$id,$campo,$valor,$pdo) {
+
+		$sql = "select $campo as nome 
+			from $tabela
+			where $id = $valor order by 1 ";
+		$consulta = $pdo->prepare($sql);
+		$consulta->execute();
+
+		while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
+			//recuperar as variaveis
+			$nome = $dados->nome;
+
+			echo $nome;
+
+		}
+
+	}
+
 	/*
 	função para transformar numeros
 	anãvelivebou!

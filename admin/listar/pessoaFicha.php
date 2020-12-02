@@ -42,7 +42,7 @@
 							<td>$nome</td>
 							<td>$telefone</td>
 							<td>
-								<a href='cadastros/fichaanamnese/$idpessoa' class='btn btn-success btn-sm'>
+								<a href='cadastros/fichaanamnese' class='btn btn-success btn-sm'>
 									<i class='fas fa-edit'></i>
 								</a>
 							</td>
