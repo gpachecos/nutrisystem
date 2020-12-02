@@ -58,7 +58,7 @@
 						// "foto"=>$dados->foto
 					);
 
-					print_r( $_SESSION["nutrisystem"] );
+					//print_r( $_SESSION["nutrisystem"] );
 
 					//redirecionar a tela para o home
 					//com javascript
