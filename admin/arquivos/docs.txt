@@ -1,0 +1,26 @@
+jQuery 3.3.1
+http://jquery.com/download/
+
+Bootstrap 4
+https://getbootstrap.com/
+
+Font Awesome
+https://fontawesome.com
+
+Parsley Validate
+http://parsleyjs.org/
+
+Data Tables
+https://datatables.net/
+
+Gijgo Date Picker Bootstrap 4
+https://gijgo.com/datepicker/example/bootstrap-4
+
+Icons Loading Gif
+https://icons8.com/preloaders/en/free
+
+Lightbox 2
+https://lokeshdhakar.com/projects/lightbox2/
+
+Flot Charts
+https://www.flotcharts.org/
