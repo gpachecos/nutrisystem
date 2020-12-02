@@ -47,7 +47,7 @@
 		<div class="clearfix"></div>
 		
 
-		<form name="cadastro" method="post" action="salvar/habitoscotidianos" data-parsley-validate enctype="multipart/form-data">
+		<form name="cadastro" method="post" action="salvar/fichaanamnese" data-parsley-validate enctype="multipart/form-data">
 
 			
 					<div class="row">
