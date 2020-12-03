@@ -100,7 +100,7 @@
 		/********  TRAZER DADOS DA FICHA DE HABITOS COTIDIANOS  ********/
 
 		//inicializar as variaveis dos habitos cotidianos
-		$suplementos = $alergia = $intolerancia = $aversao = "";
+		$idhabitosalimentares = $suplementos = $alergia = $intolerancia = $aversao = "";
 
 		//verificar o id - $p[2]
 		if ( isset ( $p[2] ) ) {
@@ -116,11 +116,12 @@
 			$consulta->execute();
 			//recuperar os dados
 			$dados = $consulta->fetch(PDO::FETCH_OBJ);
-	
-			$suplementos		= $dados->suplementos; 
-            $alergia			= $dados->alergia; 
-            $intolerancia		= $dados->intolerancia; 
-            $aversao			= $dados->aversao;
+			
+			$idhabitosalimentares 	= $dados->idhabitosalimentares;
+			$suplementos			= $dados->suplementos; 
+            $alergia				= $dados->alergia; 
+            $intolerancia			= $dados->intolerancia; 
+            $aversao				= $dados->aversao;
 		}
 	
 	?>
@@ -135,8 +136,8 @@
 				<div class="col-12 col-md-12">
 					<label for="suplementos">Suplementos Alimentares:</label>
 					<textarea name="suplementos" 
-					class="form-control" value="<?=$suplementos ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
+					 class="form-control" 
+					required data-parsley-required-message="Preencha este campo" rows="3"><?=$suplementos;?></textarea>
 				</div>
 			</div>
 			
@@ -145,8 +146,8 @@
 				<div class="col-12 col-md-12">
 					<label for="alergia">Alergia Alimentar:</label>
 					<textarea name="alergia" 
-					class="form-control" value="<?=$alergia ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
+					class="form-control" 
+					required data-parsley-required-message="Preencha este campo" rows="3"><?=$alergia;?></textarea>
 				</div>
 			</div>
 
@@ -155,8 +156,8 @@
 				<div class="col-12 col-md-12">
 					<label for="intolerancia">Intolerância Alimentar:</label>
 					<textarea name="intolerancia" 
-					class="form-control" value="<?=$intolerancia ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
+					class="form-control" 
+					required data-parsley-required-message="Preencha este campo" rows="3"><?=$intolerancia;?></textarea>
 				</div>
 			</div>
 			
@@ -165,8 +166,8 @@
 				<div class="col-12 col-md-12">
 					<label for="aversao">Aversão Alimentar:</label>
 					<textarea name="aversao" 
-					class="form-control" value="<?=$aversao ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
+					class="form-control" 
+					required data-parsley-required-message="Preencha este campo" rows="3"><?=$aversao;?></textarea>
 				</div>
 			</div>
 		

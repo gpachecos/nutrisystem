@@ -47,7 +47,7 @@
 		<div class="clearfix"></div>
 		
 
-		<form name="cadastro" method="post" action="salvar/habitosalimentares" data-parsley-validate enctype="multipart/form-data">
+		<form name="cadastro" method="post" action="salvar/exames" data-parsley-validate enctype="multipart/form-data">
 
 			
 					<div class="row">
@@ -100,16 +100,16 @@
 		/********  TRAZER DADOS DA FICHA DE HABITOS COTIDIANOS  ********/
 
 		//inicializar as variaveis dos habitos cotidianos
-		$suplementos = $alergia = $intolerancia = $aversao = "";
+		$nomeexame = $dataexame = $referencia = $alteracao = $arqexame = "";
 
 		//verificar o id - $p[2]
 		if ( isset ( $p[2] ) ) {
 			
 			//selecionar os dados conforme o id
-			$sql = "select ha.*
+			$sql = "select e.*
 					from pessoa p
 					left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
-					left join habitosalimentares ha on (f.idfichaanamnese = ha.idfichaanamnese) 
+					left join exame e on (f.idfichaanamnese = e.idfichaanamnese) 
 					where f.idfichaanamnese = ? limit 1";
 			$consulta = $pdo->prepare( $sql );
 			$consulta->bindParam(1,$p[2]);
@@ -117,10 +117,11 @@
 			//recuperar os dados
 			$dados = $consulta->fetch(PDO::FETCH_OBJ);
 	
-			$suplementos		= $dados->suplementos; 
-            $alergia			= $dados->alergia; 
-            $intolerancia		= $dados->intolerancia; 
-            $aversao			= $dados->aversao;
+			$nomeexame		    = $dados->nomeexame; 
+            $dataexame			= $dados->dataexame; 
+            $referencia		    = $dados->referencia; 
+            $alteracao			= $dados->alteracao;
+            $arqexame			= $dados->arqexame;
 		}
 	
 	?>
@@ -132,43 +133,48 @@
         <br>
 
 			<div class="row">
-				<div class="col-12 col-md-12">
-					<label for="suplementos">Suplementos Alimentares:</label>
-					<textarea name="suplementos" 
-					class="form-control" value="<?=$suplementos ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
+                <div class="col-12 col-md-2">
+                    <label for="dataexame">Data do Exame:</label>
+                    <input type="text" name="dataexame" required
+                    class="form-control" data-mask="99/99/9999" 
+                    value="<?=$dataexame;?>">
+                </div>
+                <br>
+                <div class="col-12 col-md-3">
+					<label for="nomeexame">Nome do Exame:</label>
+					<input type="text" name="nomeexame" 
+					class="form-control" value="<?=$nomeexame;?>"
+					required data-parsley-required-message="Preencha este campo" >
+                </div>
+                <br>
+                <div class="col-12 col-md-3">
+					<label for="referencia">Referência:</label>
+					<input type="text" name="referencia" 
+					class="form-control" value="<?=$referencia;?>"
+					required data-parsley-required-message="Preencha este campo" >
+                </div>
+                <br>
+                <div class="col-12 col-md-4">
+					<label for="alteracao">Alteração :</label>
+					<input type="text" name="alteracao" 
+					class="form-control" value="<?=$alteracao;?>"
+					required data-parsley-required-message="Preencha este campo" >
 				</div>
-			</div>
-			
-			<br>
-			<div class="row">
-				<div class="col-12 col-md-12">
-					<label for="alergia">Alergia Alimentar:</label>
-					<textarea name="alergia" 
-					class="form-control" value="<?=$alergia ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
-				</div>
-			</div>
-
-			<br>
-			<div class="row">
-				<div class="col-12 col-md-12">
-					<label for="intolerancia">Intolerância Alimentar:</label>
-					<textarea name="intolerancia" 
-					class="form-control" value="<?=$intolerancia ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
-				</div>
-			</div>
-			
-			<br>
-			<div class="row">
-				<div class="col-12 col-md-12">
-					<label for="aversao">Aversão Alimentar:</label>
-					<textarea name="aversao" 
-					class="form-control" value="<?=$aversao ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
-				</div>
-			</div>
+            </div>
+            <br>
+            <div class="row">
+                
+                <?php //if ($msg != false) echo "<div class=\"alert $class\" role=\"alert\">$msg</div>"; ?>
+        
+                <div class="col 12 col-md-auto">
+                    <input type="hidden" name="enviou" value="1">
+                    Arquivo PDF:<br>
+                    <input type="file" name="arquivo" class="form-control">
+                    <?php //if ($msg != false) echo "<div class=\"alert $class\" role=\"alert\">$msg</div>"; ?>
+                </div>
+                
+                
+            </div>
 		
 
 			<br>			

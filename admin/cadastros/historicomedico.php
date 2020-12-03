@@ -120,7 +120,7 @@
 			$usomedicamentos		= $dados->usomedicamentos; 
             $descmedicamentos		= $dados->descmedicamentos; 
             $horariomedicamentos	= $dados->horariomedicamentos; 
-            $historicofamilia		= $dados->historicofamiliar;
+            $historicofamiliar		= $dados->historicofamiliar;
 		}
 	
 	?>
@@ -167,8 +167,8 @@
 				<div class="col-12 col-md-12">
 					<label for="historicofamiliar">Histórico Familiar:</label>
 					<textarea name="historicofamiliar" 
-					class="form-control" value="<?=$historicofamiliar ;?>"
-					required data-parsley-required-message="Preencha este campo" rows="3"></textarea>
+					class="form-control"
+					required data-parsley-required-message="Preencha este campo" rows="3"><?=$historicofamiliar;?></textarea>
 				</div>
 			</div>
 
