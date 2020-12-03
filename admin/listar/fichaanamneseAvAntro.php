@@ -8,26 +8,30 @@
 <div class="container">
 	<div class="coluna">
 
-		<h1>Listagem de Vendas</h1>
+		<h1>Relação de Fichas de Anamnese por Avaliação Antropométrica</h1>
 
 
 		<table class="table table-hover table-striped table-bordered">
 			<thead>
 				<tr>
-					<td width="10%">ID</td>
-					<td width="40%">Nome do Cliente</td>
-					<td width="10%">Data</td>
-					<td width="20%">Status</td>
-					<td width="10%">Total</td>
+					<td width="5%">ID</td>
+					<td width="20%">Nome da Pessoa</td>
+                    <td width="13%">Registro Ficha</td>
+					<td width="20%">Data Ficha</td>
+					<td width="20%">Código Avaliação</td>
+					<td width="20%">Data da Avaliação</td>
 					<td>Opções</td>
 				</tr>
 			</thead>
 			<tbody>
 				<?php
 					//selecionar os dados do editora
-					$sql = "select v.id, c.nome, v.status, date_format(v.data,'%d/%m/%Y') data, ( select sum(vq.valor * vq.quantidade) from venda_quadrinho vq where vq.venda_id = v.id ) total from venda v 
-						inner join cliente c on (c.id = v.cliente_id)
-						order by v.data desc";
+					$sql = "select p.idpessoa, p.nome , f.idfichaanamnese, date_format(f.dataficha,'%d/%m/%Y') as dataficha
+							,aa.idavaliacaoantropometrica , date_format(aa.dataavaliacao,'%d/%m/%Y') as dataavaliacao
+							from pessoa p 
+							left join fichaanamnese f on (p.idpessoa = f.idpessoa)
+							left join avaliacaoantropometrica aa on (f.idfichaanamnese = aa.idfichaanamnese)  
+							order by nome";
 					$consulta = $pdo->prepare($sql);
 					$consulta->execute();
 
@@ -35,27 +39,24 @@
 					while ( $linha = $consulta->fetch(PDO::FETCH_OBJ)) {
 
 						//separar os dados
-						$id 	= $linha->id;
-						$nome 	= $linha->nome;
-						$data 	= $linha->data;
-						$status = $linha->status;
-						$total 	= number_format($linha->total,2,",",".");
-
+						$idpessoa 	        			= $linha->idpessoa;
+						$nome 	            			= $linha->nome;
+                        $idfichaanamnese 				= $linha->idfichaanamnese;
+						$dataficha 	        			= $linha->dataficha;
+						$idavaliacaoantropometrica 		= $linha->idavaliacaoantropometrica;
+						$dataavaliacao 					= $linha->dataavaliacao;
 
 						//montar as linhas e colunas da tabela
 						echo "<tr>
-							<td>$id</td>
+							<td>$idpessoa</td>
 							<td>$nome</td>
-							<td>$data</td>
-							<td>$status</td>
-							<td>$total</td>
+                            <td>$idfichaanamnese</td>
+							<td>$dataficha</td>
+							<td>$idavaliacaoantropometrica</td>
+							<td>$dataavaliacao</td>
 							<td>
-								<a href='cadastros/venda/$id' class='btn btn-success btn-sm'>
+								<a href='cadastros/avaliacaoantropometrica/$idfichaanamnese' class='btn btn-success btn-sm'>
 									<i class='fas fa-edit'></i>
-								</a>
-
-								<a href='javascript:excluir($id)' class='btn btn-danger btn-sm'>
-									<i class='fas fa-trash'></i>
 								</a>
 							</td>
 						</tr>";
@@ -69,11 +70,11 @@
 </div>
 <script type="text/javascript">
 	//funcao em javascript para perguntar se quer mesmo excluir
-	function excluir(id) {
+	function excluir(idpessoa) {
 		//perguntar
 		if ( confirm("Deseja mesmo excluir? Tem certeza?" ) ) {
 			//chamar a tela de exclusão
-			location.href = "excluir/venda/"+id;
+			location.href = "excluir/pessoa/"+idpessoa;
 		}
 	}
 

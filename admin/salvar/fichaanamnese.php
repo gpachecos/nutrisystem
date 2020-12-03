@@ -12,7 +12,7 @@
 			$$key = trim ( $value );
 		}
 
-		//  var_dump($ingbebidaalcool);
+		//var_dump($_POST);
 		//  exit;
 
 		if ( empty( $dataficha ) ) {
@@ -30,6 +30,31 @@
 		//se o id for vazio insere - se não update!
 		if ( empty ( $idfichaanamnese ) ) {
 
+			// VALIDAÇÃO para verificar se já existe uma ficha para a mesma pessoa na mesma data, caso houver não executa.
+			$sql3 = "
+				select p.idpessoa, p.nome , f.idfichaanamnese, f.dataficha
+				from pessoa p 
+				left join fichaanamnese f on (p.idpessoa = f.idpessoa) 
+				where p.idpessoa = ? and f.dataficha = ? limit 1";
+			$consulta3 = $pdo->prepare( $sql3 );
+			$consulta3->bindParam(1,$idpessoa);
+			$consulta3->bindParam(2,$dataficha);
+			$consulta3->execute();
+			//recuperar os dados
+			$dados3 = $consulta3->fetch(PDO::FETCH_OBJ);
+			$dataficha3 		= $dados3->dataficha;
+			$idfichaanamnese3 		= $dados3->idfichaanamnese;
+
+			//verificar se o dados trouxe algum resultado
+			if ( $dataficha3 == $dataficha ) {
+				$msg = "Já existe uma Ficha Anamnese cadastrada na sua base de dados, para esta data. É a ficha: $idfichaanamnese3";
+				mensagem($msg);
+				exit;
+			}
+
+
+
+
 			// //criptografar a senha
 			// $senha = password_hash($senha, PASSWORD_DEFAULT);
 
@@ -45,7 +70,7 @@
 
 			if ( $consulta->execute() ) {
 
-				//selecionar os dados conforme o id
+				//busca o id da ficha para carregar na variavel para executar o insert dos habitos cotidianos
 					$sql1 = "
 						select p.idpessoa, p.nome , f.idfichaanamnese, f.dataficha
 						from pessoa p 
@@ -63,11 +88,6 @@
 					$idfichaanamnese 	= $dados->idfichaanamnese;
 					//$dataficha 			= $dados->dataficha;
 
-					//verificar se o dados trouxe algum resultado
-					if ( $dados->dataficha == $dataficha ) {
-						$msg = "Já existe uma Ficha Anamnese cadastrada na sua base de dados, para esta data. É a ficha: $idfichaanamnese";
-						mensagem($msg);
-					}
 
 				//salvar no banco
 				$pdo->commit();
@@ -184,7 +204,7 @@
 			$pdo->commit();
 
 			$msg = "Registro inserido com sucesso!";
-			sucesso( $msg, "listar/pessoa" );
+			//sucesso( $msg, "listar/pessoa" );
 
 
 		} else {
