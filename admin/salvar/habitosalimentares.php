@@ -90,7 +90,7 @@
 			$pdo->commit();
 
 			$msg = "Registro inserido com sucesso!";
-			sucesso( $msg, "listar/pessoa" );
+			sucesso( $msg, "cadastros/avaliacaoantropometrica/$idfichaanamnese" );
 
 
 		} else {

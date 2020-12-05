@@ -12,7 +12,7 @@
 			$$key = trim ( $value );
 		}
 
-		//  var_dump($ingbebidaalcool);
+		//   var_dump($_POST);
 		//  exit;
 
 		if ( empty( $dataficha ) ) {
@@ -22,88 +22,95 @@
 
 		//formatar a datas
 		$dataficha = formataData( $dataficha );
+		$dataexame = formataData( $dataexame );
 		
         //selecionar os dados conforme o idfichaanamnese para trazer o idhabitosalimentares caso estiver cadastrado
-                $sql1 = "
-                select e.*
+            $sql1 = "
+                select e.*, p.nome
                 from pessoa p
                 left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
                 left join exame e on (f.idfichaanamnese = e.idfichaanamnese) 
                 where f.idfichaanamnese = ? limit 1";
-                $consulta1 = $pdo->prepare( $sql1 );
-                $consulta1->bindParam(1,$idfichaanamnese);
-                $consulta1->execute();
-                //recuperar os dados
-                $dados = $consulta1->fetch(PDO::FETCH_OBJ);
+			$consulta1 = $pdo->prepare( $sql1 );
+			$consulta1->bindParam(1,$idfichaanamnese);
+			$consulta1->execute();
+			//recuperar os dados
+			$dados = $consulta1->fetch(PDO::FETCH_OBJ);
 
-                $idexame 	= $dados->idexame;
+			$idexame 	= $dados->idexame;
+			$nome		= $dados->nome;
 
         
 		$pdo->beginTransaction();
 
 
 		//se o id for vazio insere - se não update!
-		if ( !empty ( $idfichaanamnese ) && empty ( $idexame ) ) {
+		if ( !empty ( $idfichaanamnese ) /*&& empty ( $idexame ) */) {
 
-			
+			//adicionar nome ao arquivo
+			$extensao = extensao($_FILES["arquivo"]["name"]);
+			$arqexame = time().$extensao;
+
 			// insert dos habitos cotidianos
-			$sql2 = "insert into habitosalimentares 
-			(idhabitosalimentares, idfichaanamnese, suplementos, alergia, intolerancia, aversao)
+			$sql2 = "insert into exame 
+			(idexame, idfichaanamnese, nomeexame, dataexame, referencia, alteracao, arqexame)
 			values 
-			(NULL, :idfichaanamnese, :suplementos, :alergia, :intolerancia, :aversao)";
+			(NULL, :idfichaanamnese, :nomeexame, :dataexame, :referencia, :alteracao, :arqexame)";
 
 			$consulta2 = $pdo->prepare( $sql2 );
 			$consulta2->bindValue(":idfichaanamnese", $idfichaanamnese);
-			$consulta2->bindValue(":suplementos", $suplementos);
-			$consulta2->bindValue(":alergia", $alergia);
-			$consulta2->bindValue(":intolerancia", $intolerancia);
-			$consulta2->bindValue(":aversao", $aversao);
+			$consulta2->bindValue(":nomeexame", $nomeexame);
+			$consulta2->bindValue(":dataexame", $dataexame);
+			$consulta2->bindValue(":referencia", $referencia);
+			$consulta2->bindValue(":alteracao", $alteracao);
+			$consulta2->bindValue(":arqexame", $arqexame);
 			
-		} //else {
-
-			// // //criptografar a senha
-			// // $senha = password_hash($senha, PASSWORD_DEFAULT);
+		} else {
 
 			//update
-        //     $sql2 = "update habitoscotidiano set 
-		// 		restricaoalimentar = :restricaoalimentar, descrestricao = :descrestricao, ingbebidaalcool = :ingbebidaalcool, 
-		// 		freqbebidaalcool = :freqbebidaalcool, fumante = :fumante, freqfumo = :freqfumo, qdtemoradorescasa = :qdtemoradorescasa, 
-		// 		quemfazcompra = :quemfazcompra, localcompra = :localcompra, freqcompra = :freqcompra, litrosoleo = :litrosoleo, 
-		// 		quilossal = :quilossal, qualidadesono = :qualidadesono, horassono = :horassono, observacaosono = :observacaosono, 
-		// 		praticaexercfisico = :praticaexercfisico, exerciciofisico = :exerciciofisico, freqexercfisico = :freqexercfisico, 
-		// 		tempoexercfisico = :tempoexercfisico
-		// 		where idfichaanamnese = :idfichaanamnese limit 1";
-		// 	$consulta2 =  $pdo->prepare( $sql2 );
-		// 	$consulta2->bindValue(":idfichaanamnese", $idfichaanamnese);
-		// 	$consulta2->bindValue(":restricaoalimentar", $restricaoalimentar);
-		// 	$consulta2->bindValue(":descrestricao", $descrestricao);
-		// 	$consulta2->bindValue(":ingbebidaalcool", $ingbebidaalcool);
-		// 	$consulta2->bindValue(":freqbebidaalcool", $freqbebidaalcool);
-		// 	$consulta2->bindValue(":fumante", $fumante);
-		// 	$consulta2->bindValue(":freqfumo", $freqfumo);
-		// 	$consulta2->bindValue(":qdtemoradorescasa", $qdtemoradorescasa);
-		// 	$consulta2->bindValue(":quemfazcompra", $quemfazcompra);
-		// 	$consulta2->bindValue(":localcompra", $localcompra);
-		// 	$consulta2->bindValue(":freqcompra", $freqcompra);
-		// 	$consulta2->bindValue(":litrosoleo", $litrosoleo);
-		// 	$consulta2->bindValue(":quilossal", $quilossal);
-		// 	$consulta2->bindValue(":qualidadesono", $qualidadesono);
-		// 	$consulta2->bindValue(":horassono", $horassono);
-		// 	$consulta2->bindValue(":observacaosono", $observacaosono);
-		// 	$consulta2->bindValue(":praticaexercfisico", $praticaexercfisico);
-		// 	$consulta2->bindValue(":exerciciofisico", $exerciciofisico);
-		// 	$consulta2->bindValue(":freqexercfisico", $freqexercfisico);
-		// 	$consulta2->bindValue(":tempoexercfisico", $tempoexercfisico);
-		// }
+            $sql2 = "update exame set 
+			nomeexame = :nomeexame, dataexame = :dataexame, referencia = :referencia, alteracao = :alteracao, arqexam = :arqexame
+			where idfichaanamnese = :idfichaanamnese and idexame = :idexame limit 1";
+			$consulta2 =  $pdo->prepare( $sql2 );
+			$consulta2->bindValue(":idexame", $idexame);
+			$consulta2->bindValue(":idfichaanamnese", $idfichaanamnese);
+			$consulta2->bindValue(":nomeexame", $nomeexame);
+			$consulta2->bindValue(":dataexame", $dataexame);
+			$consulta2->bindValue(":referencia", $referencia);
+			$consulta2->bindValue(":alteracao", $alteracao);
+			$consulta2->bindValue(":arqexame", $arqexame);
+		}
 
 		//executar
 		if ( $consulta2->execute() ) {
 			
+
+				//se a capa não estiver vazio - copiar
+					if ( !empty ( $_FILES["arquivo"]["name"] ) ) {
+						//echo $_FILES["arquivo"]["name"];
+						//copiar o arquivo para a pasta
+
+
+						if ( !copy( $_FILES["arquivo"]["tmp_name"], 
+							"../arquivosExame/".$arqexame.".".$extensao )) {
+							$msg = "Erro ao anexar arquivo";
+							mensagem( $msg );
+
+						}
+
+						//echo $capa;
+
+						// $pastaFotos = "../fotos/";
+						// $imagem = $_FILES["arquivo"]["name"];
+
+					}
+
+
 			//salvar no banco
 			$pdo->commit();
 
 			$msg = "Registro inserido com sucesso!";
-			sucesso( $msg, "listar/pessoa" );
+			sucesso( $msg, "cadastros/exame/$idfichaanamnese" );
 
 
 		} else {

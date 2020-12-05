@@ -37,18 +37,21 @@
 		<h1 class="float-left">Ficha de Anamnese</h1>
 		
 		<div class="float-right">
-
+			<a href="cadastros/fichaanamnese" class="btn btn-success">
+				<i class="fas fa-file"></i> Novo
+			</a>
 			<a href="listar/pessoaFicha" class="btn btn-info">
 				<i class="fas fa-search"></i> Consultar
 			</a>
 
 		</div>
+
 			
 		<div class="clearfix"></div>
 		
 
 		<form name="cadastro" method="post" action="salvar/fichaanamnese" data-parsley-validate enctype="multipart/form-data">
-
+		<br>
 			
 					<div class="row">
 						<div class="col-12 col-md-2">

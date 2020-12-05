@@ -17,11 +17,11 @@
 
 	  <div class="collapse navbar-collapse" id="menu">
 	    <ul class="navbar-nav ml-auto">
-	      <li class="nav-item">
+	      <!-- <li class="nav-item">
 	        <a class="nav-link" href="paginas/home">
 	        	<i class="fas fa-tachometer-alt"></i> Dashboard
 	        </a>
-	      </li>
+	      </li> -->
 
 	      <li class="nav-item dropdown">
 	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -30,12 +30,6 @@
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 			  <a class="dropdown-item" href="cadastros/pessoa">Pessoa</a>
 	          <a class="dropdown-item" href="cadastros/cidade">Cidade</a>
-	          <!-- <a class="dropdown-item" href="cadastros/cliente">Clientes</a> -->
-	          <!-- <a class="dropdown-item" href="cadastros/editora">Editoras</a> -->
-	          <!-- <a class="dropdown-item" href="cadastros/tipo-quadrinho">Tipos de Quadrinhos</a> -->
-	          <!-- <a class="dropdown-item" href="cadastros/personagem">Personagens</a>
-	          <a class="dropdown-item" href="cadastros/quadrinho">Quadrinhos</a>
-	          <a class="dropdown-item" href="cadastros/usuario">Usuário</a> -->
 	        </div>
 	      </li>
 
@@ -46,6 +40,12 @@
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	          <a class="dropdown-item" href="cadastros/fichaanamnese">Ficha</a>
 	        </div>
+		  </li>
+		  
+		  <li class="nav-item">
+	        <a class="nav-link" href="cadastros/avaliacaoantropometrica">
+	        	<i class="fas fa-utensils"></i> Avaliação Antropométrica
+	        </a>
 	      </li>
 
 	      <li class="nav-item">

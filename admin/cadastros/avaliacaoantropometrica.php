@@ -10,14 +10,15 @@
     
     //var_dump($p[2]);
 
+	if ( isset($p[2]) ){
 	//verificar o id - $p[2]
 	if ( isset ( $p[2] ) && ($p[2] == "") ) {
 
         $msg = "Não existe Ficha de Anamnese vinculada à esta pessoa, favor criar uma ficha para continuar com a avaliação!";
 		mensagem( $msg );
 	} else {
-
-	// 	var_dump($p[2]);
+		
+	 	//var_dump($p[2]);
 		//selecionar os dados conforme o id
 		$sql = "
             select p.idpessoa, p.nome , f.idfichaanamnese, date_format(f.dataficha,'%d/%m/%Y') as dataficha
@@ -36,8 +37,11 @@
         $dataficha 			= $dados->dataficha;
 
      }
-
+	}
 ?>
+
+
+
 <div class="container">
 	<div class="coluna">
 		<h1 class="float-left">Ficha de Anamnese</h1>

@@ -242,3 +242,11 @@
 		return $year_diff;
 
 	}
+
+	function extensao($arquivo){
+		$arquivo = strtolower($arquivo);
+		$explode = explode(".", $arquivo);
+		$arquivo = end($explode);
+	 
+		return ($arquivo);
+	}
