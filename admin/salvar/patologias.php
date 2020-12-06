@@ -72,7 +72,7 @@
 				//$erro = $consulta->errorInfo();
 				//print_r( $erro );
 
-				$link = "salvar/patologias.php?idfichaanamnese=$idfichaanamnese";
+				$link = "patologias.php?idfichaanamnese=$idfichaanamnese";
 				//echo $link;
 				sucesso("Erro ao inserir patologia",$link);
 

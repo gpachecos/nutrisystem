@@ -6,7 +6,7 @@
 		include "../verificalogin.php";
 
 	//inicializar as variaveis de pessoa
-	$idpessoa = $nome = $idfichaanamnese = $dataficha = "";
+	$idpessoa = $nome = $idfichaanamnese = $dataficha = $datacardapio = "";
     
     //var_dump($p[2]);
 
@@ -40,7 +40,7 @@
 ?>
 <div class="container">
 	<div class="coluna">
-		<h1 class="float-left">Ficha de Anamnese</h1>
+		<h1 class="float-left">Cardápio</h1>
 		
 		<div class="float-right">
 
@@ -56,127 +56,105 @@
 		<form name="cadastro" method="post" action="salvar/avaliacaoantropometrica" data-parsley-validate enctype="multipart/form-data">
 
 			
-					<div class="row">
-						<div class="col-12 col-md-2">
-							 <label for="idpessoa">ID Pessoa:</label>  
-							<input type="text" name="idpessoa" id="idpessoa" readonly
-							class="form-control" value="<?=$idpessoa;?>">
-						</div>
-						<div class="col-12 col-md-5">
-							<label for="nome">Nome da Pessoa:</label>
-							<input list="nomes" id="nome" readonly
-							class="form-control" onblur="selecionaPessoa(this.value)" value="<?=$nome;?>">
-
-							<datalist id="nomes">
-								<?php
-									$sql = "select idpessoa, nome from pessoa order by nome";
-									$consulta = $pdo->prepare( $sql );
-									$consulta->execute();
-									//recuperar os dados
-									while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
-
-										echo "<option>$dados->idpessoa - $dados->nome</option>";
-
-									}
-
-								?>
-							</datalist>
-
-						</div>
-						<div class="col-12 col-md-2">
-							<label for="idfichaanamnese">Registro:</label>
-							<input type="text" name="idfichaanamnese" 
-							class="form-control" readonly
-							value="<?=$idfichaanamnese;?>">
-						</div>
-						<div class="col-12 col-md-2">
-							<label for="dataficha">Data da Ficha:</label>
-							<input type="text" name="dataficha" required
-							class="form-control" data-mask="99/99/9999" readonly
-							value="<?=$dataficha;?>">
-						</div>
-					</div>
-			
-
-
-
-<hr>
-
-	<?php
-		/********  TRAZER DADOS DA FICHA DE HABITOS COTIDIANOS  ********/
-
-		//inicializar as variaveis dos habitos cotidianos
-        $idrefeicao = $idalimento = $datacardapio = $peso = $energia = $proteina = $lipideo = $carboidrato = "";
-
-		//verificar o id - $p[2]
-		if ( isset ( $p[2] ) ) {
-			
-			//selecionar os dados conforme o id
-			$sql = "select c.*, date_format(aa.dataavaliacao,'%d/%m/%Y') as dataavaliacao
-					from pessoa p
-					left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
-					left join cardapio c on (f.idfichaanamnese = c.idfichaanamnese) 
-					where f.idfichaanamnese = ? limit 1";
-			$consulta = $pdo->prepare( $sql );
-			$consulta->bindParam(1,$p[2]);
-			$consulta->execute();
-			//recuperar os dados
-			$dados = $consulta->fetch(PDO::FETCH_OBJ);
-	
-            $idrefeicao			= $dados->idrefeicao;
-            $idalimento			= $dados->idalimento;
-            $datacardapio		= $dados->datacardapio;
-            $peso				= $dados->peso;
-            $energia			= $dados->energia;
-            $proteina			= $dados->proteina;
-            $lipideo			= $dados->lipideo;
-            $carboidrato		= $dados->carboidrato;
-
-		}
-	
-	?>
-
-        <div class="d-flex align-items-center bd-highlight">
-            <h1 class="mr-auto p-2 bd-highlight">Avaliação Antropométrica</h1>
-            
-            <div class="p-1 bd-highlight col-md-2" >
-                <label for="dataavaliacao">Data da Avaliação:</label>
-                <input type="text" name="dataavaliacao" required
-                class="form-control" data-mask="99/99/9999" 
-                value="<?=$dataavaliacao;?>">
-            </div>
-        </div>
-        <hr>
-
-        <div class="clearfix"></div>
-        <br>
-
 			<div class="row">
-                <label for="idcategoriaalimento">Categoria Alimento:</label>
-                <select name="idcategoriaalimento" id="idcategoriaalimento" 
-                class="form-control" required 
-                data-parsley-required-message="Selecione uma opção">
-                    <option value="">Selecione</option>
-                    <?php
-                        $tabela =	"categoriaalimentos";
-                        $id 	= 	"idcategoriaalimento";
-                        $campo	= 	"nomecategoria";	 
-                        carregarOpcoes($tabela,$id,$campo,$pdo);
-                    ?>
-                </select>
+				<div class="col-12 col-md-2">
+						<label for="idpessoa">ID Pessoa:</label>  
+					<input type="text" name="idpessoa" id="idpessoa" readonly
+					class="form-control" value="<?=$idpessoa;?>">
+				</div>
+				<div class="col-12 col-md-5">
+					<label for="nome">Nome da Pessoa:</label>
+					<input list="nomes" id="nome" readonly
+					class="form-control" onblur="selecionaPessoa(this.value)" value="<?=$nome;?>">
 
-            </div>
+					<datalist id="nomes">
+						<?php
+							$sql = "select idpessoa, nome from pessoa order by nome";
+							$consulta = $pdo->prepare( $sql );
+							$consulta->execute();
+							//recuperar os dados
+							while ( $dados = $consulta->fetch(PDO::FETCH_OBJ) ) {
 
+								echo "<option>$dados->idpessoa - $dados->nome</option>";
 
-			<br>			
+							}
 
-			<div class="col-lg-12" style="text-align: right">
-				<button type="submit" class="btn btn-success">
-					Salvar/Alterar
-				</button>
+						?>
+					</datalist>
+
+				</div>
+				<div class="col-12 col-md-2">
+					<label for="idfichaanamnese">Registro:</label>
+					<input type="text" name="idfichaanamnese" 
+					class="form-control" readonly
+					value="<?=$idfichaanamnese;?>">
+				</div>
+				<div class="col-12 col-md-2">
+					<label for="dataficha">Data da Ficha:</label>
+					<input type="text" name="dataficha" required
+					class="form-control" data-mask="99/99/9999" readonly
+					value="<?=$dataficha;?>">
+				</div>
 			</div>
+			
 
 		</form>
+
+			<?php
+				//verificar se o id nao esta vazio
+				if ( !empty ( $idfichaanamnese ) ) {
+			?>
+			<hr>
+			<br>
+			<h1>Café da Manhã</h1>
+			<hr>
+			<div id="cardapio">
+				<form name="formadd" method="post" action="salvar/cafedamanha.php" data-parsley-validate 
+				target="iframe">
+
+				
+				<br>
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+					<input type="hidden" name="dataficha" value="<?=$dataficha;?>">
+
+					<div class="form-row">
+						<div class="col-12 col-md-8">
+
+							<label for="idalimento">Selecione o Alimento:</label>
+							<select name="idalimento" id="idalimento" class="form-control" 
+							required data-parsley-required-message="Selecione um alimento">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela = "alimento";
+									$id 	= "idalimento";
+									$campo  = "nomealimento";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+
+						<div class="col-12 col-md-2">
+							<input type="number" min="0" step="0.01" class="form-control" 
+							id="peso" name="peso" value="<?=$peso;?>" placeholder="Peso(gr)" 
+							required data-parsley-required-message="Informe um peso">
+						</div>
+
+						<div class="col-12 col-md-2">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/cafedamanha.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+			<?php
+				//fechando o id
+				}
+			?>
+
+
 
 	</div> <!--fim da pagina -->
 </div> <!-- fim do container -->
@@ -195,6 +173,8 @@
 			thousands: ".",
 			decimal: ","
 		});
+
+		$("#idalimento").select2();
 	})
 
 	function selecionaPessoa(nome) {

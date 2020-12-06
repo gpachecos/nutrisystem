@@ -250,3 +250,10 @@
 	 
 		return ($arquivo);
 	}
+
+	function calculaProporcaoAlimento($peso, $medida){
+
+		$resultado = ($peso * $medida)/100;
+
+		return $resultado;
+	}

@@ -96,13 +96,6 @@
 
 					<br>
 
-					<hr>
-			
-
-			<button type="submit" class="btn btn-success">
-				Salvar/Alterar
-			</button>
-
 		</form>
 
 			<?php
@@ -145,6 +138,12 @@
 				//fechando o id
 				}
 			?>
+
+			<hr>		
+
+			<button onclick="window.location.href='cadastros/habitosalimentares/<?=$idfichaanamnese?>'" type="button" class="btn btn-success">
+				Salvar/Alterar
+			</button>
 
 	</div> <!--fim da pagina -->
 </div> <!-- fim do container -->
