@@ -92,9 +92,9 @@
 					</div>
 			
 
-<br>
+					<br>
 
-<hr>
+					<hr>
 
 	<?php
 		/********  TRAZER DADOS DA FICHA DE HABITOS COTIDIANOS  ********/

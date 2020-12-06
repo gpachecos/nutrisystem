@@ -3,15 +3,6 @@
 	if ( file_exists ( "verificalogin.php" ) )
 		include "verificalogin.php";
 	else
-        include "../verificalogin.php";
-
-?>
-
-<?php
-	//verificar se o arquivo existe
-	if ( file_exists ( "verificalogin.php" ) )
-		include "verificalogin.php";
-	else
 		include "../verificalogin.php";
 
 	//inicializar as variaveis de pessoa
@@ -19,6 +10,8 @@
 
 	//verificar o id - $p[2]
 	if ( isset ( $p[2] ) ) {
+
+		$idfichaanamnese = $p[2];
 		
 		//selecionar os dados conforme o id
 		$sql = "
@@ -56,7 +49,7 @@
 		<div class="clearfix"></div>
 		
 
-		<form name="cadastro" method="post" action="cadastros/recordatorio" data-parsley-validate enctype="multipart/form-data" id="form_recordatorio">
+		<form name="cadastro" method="post" action="cadastros/historicomedico" data-parsley-validate enctype="multipart/form-data">
 
 			
 					<div class="row">
@@ -88,187 +81,92 @@
 						</div>
 						<div class="col-12 col-md-2">
 							<label for="idfichaanamnese">Registro:</label>
-							<input type="text" id="idfichaanamnese" name="idfichaanamnese" 
+							<input type="text" name="idfichaanamnese" 
 							class="form-control" readonly
 							value="<?=$idfichaanamnese;?>">
 						</div>
 						<div class="col-12 col-md-2">
 							<label for="dataficha">Data da Ficha:</label>
-							<input type="text" id="dataficha" name="dataficha" required
+							<input type="text" name="dataficha" required
 							class="form-control" data-mask="99/99/9999" readonly
 							value="<?=$dataficha;?>">
 						</div>
 					</div>
 			
 
-<br>
+					<br>
 
-<hr>
-
-	<?php
-		/********  TRAZER DADOS DA FICHA DE HABITOS COTIDIANOS  ********/
-
-		//inicializar as variaveis dos habitos cotidianos
-		$datarecordatorio = $tipodia = $horario = $alimento = $quantidade = "";
-
-		//verificar o id - $p[2]
-		if ( isset ( $p[2] ) ) {
+					<hr>
 			
-			//selecionar os dados conforme o id
-			$sql = "select r.*, date_format(r.datarecordatorio,'%d/%m/%Y') as datarecordatorio, rh.*
-					from pessoa p
-					left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
-					left join recordatorio r on (f.idfichaanamnese = r.idfichaanamnese) 
-					left join recordatoriohora rh on (r.idrecordatorio = rh.idrecordatorio)  
-					where f.idfichaanamnese = ? limit 1";
-			$consulta = $pdo->prepare( $sql );
-			$consulta->bindParam(1,$p[2]);
-			$consulta->execute();
-			//recuperar os dados
-			$dados = $consulta->fetch(PDO::FETCH_OBJ);
-	
-			$idrecordatorio     = $dados->idrecordatorio; 
-			$datarecordatorio   = $dados->datarecordatorio; 
-			$tipodia			= $dados->tipodia;
-			$horario			= $dados->horario;
-			$alimento			= $dados->alimento;
-			$quantidade			= $dados->quantidade;
-		}
-	
-	?>
-		
-		<h1 class="float-left">Recordatório</h1>
 
-        <div class="clearfix"></div>
-        <br>
-
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="opcao1">
-			<label class="form-check-label" for="inlineCheckbox1">1</label>
-		</div>
-		<div class="form-check form-check-inline">
-			<input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="opcao2">
-			<label class="form-check-label" for="inlineCheckbox2">2</label>
-		</div>
-		
-		<div class="row">
-			<div class="col-4 col-md-10">
-				<button onclick="window.location.href='cadastros/habitosalimentares/<?=$idfichaanamnese?>'" type="button" class="btn btn-info">
-						<i class='fas fa-plus'>Anterior</i>
-						</button>
-						<!-- <button onclick="window.location.href='/page2'">Continue</button> -->
-			</div>
-			<div class="col col-md-2">
-				<button type="button" class="btn btn-info">
-						<i class='fas fa-plus'>Próximo</i>
-						</button></div>
-		</div>
-
-		<!-- <div class="col-lg-12" style="text-align: right"> -->
-			<?php
-			echo "
-			<a href='cadastros/avaliacaoclinica/$idfichaanamnese' class='btn btn-success' role='button'>
+			<button type="submit" class="btn btn-success">
 				Salvar/Alterar
-			</a>"
-			?>
-		<!-- </div> -->
-
+			</button>
 
 		</form>
 
-		<hr>
+			<?php
+				//verificar se o id nao esta vazio
+				if ( !empty ( $idfichaanamnese ) ) {
+			?>
+			<hr>
+			<div id="patologia">
+				<h3>Patologias:</h3>
+				<form name="formadd" method="post" action="salvar/patologias.php" data-parsley-validate 
+				target="iframe">
 
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+
+					<div class="row">
+						<div class="col-8">
+
+							<label for="idpatologia">Selecione a Patologia:</label>
+							<select name="idpatologia" class="form-control" required data-parsley-required-message="Selecione um personagem">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela ="patologia";
+									$id 	= "idpatologia";
+									$campo  = "nomepatologia";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+						<div class="col-4">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/patologias.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+			<?php
+				//fechando o id
+				}
+			?>
 
 	</div> <!--fim da pagina -->
 </div> <!-- fim do container -->
 
 <script type="text/javascript">
-	//funcao em javascript para perguntar se quer mesmo excluir
-	function excluir(idexame) {
-		//perguntar
-		if ( confirm("Deseja mesmo excluir? Tem certeza?" ) ) {
-			//chamar a tela de exclusão
-			location.href = "excluir/exame/"+idexame;
-		}
-	}
-
-	function selecionaPessoa(nome) {
-				nome = nome.split(" - ");
-				$("#idpessoa").val(nome[0])
-			}
-
-	function excluir(idrecordatoriohora) {
-		//perguntar
-		if ( confirm("Deseja mesmo excluir? Tem certeza?" ) ) {
-			//chamar a tela de exclusão
-			location.href = "excluir/recordatorioHora/"+idrecordatoriohora;
-		}
-	}
-
-
-	function salvarRecordatorio(){
-		const param = {
-			datarecordatorio:document.getElementById('datarecordatorio').value
-			,tipodia:document.getElementById('tipodia').value
-			,idfichaanamnese:document.getElementById('idfichaanamnese').value
-			,dataficha:document.getElementById('dataficha').value
-		}
-		$.ajax({ 
-			type: "POST", 
-			url: "salvar/recordatorio.php",				     
-			dataType: 'json',
-			data: param,
-			success: function(result){					
-				if(result['message']) {
-					alert(result['message']);
-				}
-												
-			},
-			fail:function(err){
-				alert("Erro ao inserir recordatório!");
-			}
+	$(document).ready(function(){
+		//aplicar o summernote
+		$("#resumo").summernote({
+			placeholder:"Digite o resumo",
+			height: 200,
+			lang: 'pt-BR'
 		});
-	}
 
-	function salvarRecordatorioHora(){
-		const param = {
-			horario:document.getElementById('horario').value
-			,alimento:document.getElementById('alimento').value
-			,quantidade:document.getElementById('quantidade').value
-			,idrecordatorio: document.getElementById('idrecordatorio').value
-			,idfichaanamnese:document.getElementById('idfichaanamnese').value
-		}
-		$.ajax({ 
-			type: "POST", 
-			url: "salvar/recordatorioHora.php",				     
-			dataType: 'json',
-			data: param,
-			success: function(result){					
-				if(result['message']) {
-					alert(result['message']);
-				}
-												
-			},
-			fail:function(err){
-				alert("Erro ao inserir recordatório!");
-			}
+		//aplica a mascara de valor no campo
+		$("#valor").maskMoney({
+			thousands: ".",
+			decimal: ","
 		});
-	}
 
-
-	$(document).ready( function () {
-	    $('.table').DataTable( {
-        "language": {
-            "lengthMenu": "Mostrar _MENU_ resultados por página",
-            "zeroRecords": "Nenhum registro encontrado",
-            "info": "Mostrando página _PAGE_ de _PAGES_",
-            "infoEmpty": "No records available",
-            "infoFiltered": "(filtrando de _MAX_ em um total de registros)",
-            "search":"Buscar",
-            "Previous":"Anterior"
-        }
-    });
-	} );
+		//selecionar o id da editora
+		$("#editora_id").val(<?=$editora_id;?>);
+		$("#tipo_id").val(<?=$tipo_id;?>);
+	});
 </script>
-
 
