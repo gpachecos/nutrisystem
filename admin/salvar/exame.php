@@ -49,7 +49,7 @@
 
 			//adicionar nome ao arquivo
 			$extensao = extensao($_FILES["arquivo"]["name"]);
-			$arqexame = time().$extensao;
+			$arqexame = time().".".$extensao;
 
 			// insert dos habitos cotidianos
 			$sql2 = "insert into exame 
@@ -92,7 +92,7 @@
 
 
 						if ( !copy( $_FILES["arquivo"]["tmp_name"], 
-							"../arquivosExame/".$arqexame.".".$extensao )) {
+							"../arquivosExame/".$arqexame )) {
 							$msg = "Erro ao anexar arquivo";
 							mensagem( $msg );
 

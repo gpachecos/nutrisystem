@@ -9,7 +9,7 @@
 	//verificar se esta sendo enviado o id
 	if ( isset ( $p[2] ) ) {
 
-		$idexame = (int)$p[2];
+		$idrecordatoriohora = (int)$p[2];
 		/* 
 		echo "<pre>";
 		var_dump($id);
@@ -17,17 +17,17 @@
 		*/
 
 		//verificar se existe um exame com este tipo
-		$sql = "select * from exame 
-			where idexame = ? limit 1";
-		$consulta = $pdo->prepare( $sql );
-		$consulta->bindParam(1,$idexame);
-		$consulta->execute();
+		// $sql = "select * from recordatoriohora 
+		// 	where idrecordatoriohora = ? limit 1";
+		// $consulta = $pdo->prepare( $sql );
+		// $consulta->bindParam(1,$idexame);
+		// $consulta->execute();
 		
-        $dados = $consulta->fetch(PDO::FETCH_OBJ);
+        // $dados = $consulta->fetch(PDO::FETCH_OBJ);
 
-        $arqexame 	= $dados->arqexame;
-        // var_dump($arqexame);
-        // exit;
+        // $arqexame 	= $dados->arqexame;
+        //  var_dump($idrecordatoriohora);
+        //  exit;
         
 
 		// //verificar se trouxe algum id
@@ -37,20 +37,20 @@
 		// }
 
 		//excluir a editora
-		$sql = "delete from exame where idexame = ? limit 1";
+		$sql = "delete from recordatoriohora where idrecordatoriohora = ? limit 1";
 		$consulta = $pdo->prepare( $sql );
-		$consulta->bindParam(1,$idexame);
+		$consulta->bindParam(1,$idrecordatoriohora);
 
 		//verificar se o registro foi excluido
 		if ( $consulta->execute() ) {
 
             //excluindo o arquivo na rede
-            unlink("../arquivosExame/".$arqexame);
+            //unlink("../arquivosExame/".$arqexame);
 
 			$msg = "Exame excluído com sucesso";
 			mensagem ( $msg );
 		} else {
-			$msg = "Erro ao excluir exame";
+			$msg = "Erro ao excluir item de recordatório";
 			mensagem( $msg );
 		}
 
