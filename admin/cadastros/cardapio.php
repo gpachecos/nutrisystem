@@ -104,8 +104,9 @@
 				//verificar se o id nao esta vazio
 				if ( !empty ( $idfichaanamnese ) ) {
 			?>
+
+			<!-- Café da Manhã -->
 			<hr>
-			<br>
 			<h1>Café da Manhã</h1>
 			<hr>
 			<div id="cardapio">
@@ -149,11 +150,244 @@
 
 				<iframe name="iframe" width="100%" height="300px" src="salvar/cafedamanha.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
 			</div>
+			
+
+			<!-- Lanche da Manhã -->
+			<hr>
+			<h1>Lanche da Manhã</h1>
+			<hr>
+			<div id="cardapio">
+				<form name="formadd" method="post" action="salvar/lanchemanha.php" data-parsley-validate 
+				target="iframe">
+
+				
+				<br>
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+					<input type="hidden" name="dataficha" value="<?=$dataficha;?>">
+
+					<div class="form-row">
+						<div class="col-12 col-md-8">
+
+							<label for="idalimento">Selecione o Alimento:</label>
+							<select name="idalimento" id="idalimento" class="form-control" 
+							required data-parsley-required-message="Selecione um alimento">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela = "alimento";
+									$id 	= "idalimento";
+									$campo  = "nomealimento";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+
+						<div class="col-12 col-md-2">
+							<input type="number" min="0" step="0.01" class="form-control" 
+							id="peso" name="peso" value="<?=$peso;?>" placeholder="Peso(gr)" 
+							required data-parsley-required-message="Informe um peso">
+						</div>
+
+						<div class="col-12 col-md-2">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/lanchemanha.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+
+			<!-- Almoço -->
+			<hr>
+			<h1>Almoço</h1>
+			<hr>
+			<div id="cardapio">
+				<form name="formadd" method="post" action="salvar/almoco.php" data-parsley-validate 
+				target="iframe">
+
+				
+				<br>
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+					<input type="hidden" name="dataficha" value="<?=$dataficha;?>">
+
+					<div class="form-row">
+						<div class="col-12 col-md-8">
+
+							<label for="idalimento">Selecione o Alimento:</label>
+							<select name="idalimento" id="idalimento" class="form-control" 
+							required data-parsley-required-message="Selecione um alimento">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela = "alimento";
+									$id 	= "idalimento";
+									$campo  = "nomealimento";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+
+						<div class="col-12 col-md-2">
+							<input type="number" min="0" step="0.01" class="form-control" 
+							id="peso" name="peso" value="<?=$peso;?>" placeholder="Peso(gr)" 
+							required data-parsley-required-message="Informe um peso">
+						</div>
+
+						<div class="col-12 col-md-2">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/almoco.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+
+			<!-- Café da Tarde -->
+			<hr>
+			<h1>Café da Tarde</h1>
+			<hr>
+			<div id="cardapio">
+				<form name="formadd" method="post" action="salvar/cafedatarde.php" data-parsley-validate 
+				target="iframe">
+
+				
+				<br>
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+					<input type="hidden" name="dataficha" value="<?=$dataficha;?>">
+
+					<div class="form-row">
+						<div class="col-12 col-md-8">
+
+							<label for="idalimento">Selecione o Alimento:</label>
+							<select name="idalimento" id="idalimento" class="form-control" 
+							required data-parsley-required-message="Selecione um alimento">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela = "alimento";
+									$id 	= "idalimento";
+									$campo  = "nomealimento";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+
+						<div class="col-12 col-md-2">
+							<input type="number" min="0" step="0.01" class="form-control" 
+							id="peso" name="peso" value="<?=$peso;?>" placeholder="Peso(gr)" 
+							required data-parsley-required-message="Informe um peso">
+						</div>
+
+						<div class="col-12 col-md-2">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/cafedatarde.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+
+			<!-- Jantar -->
+			<hr>
+			<h1>Jantar</h1>
+			<hr>
+			<div id="cardapio">
+				<form name="formadd" method="post" action="salvar/jantar.php" data-parsley-validate 
+				target="iframe">
+
+				
+				<br>
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+					<input type="hidden" name="dataficha" value="<?=$dataficha;?>">
+
+					<div class="form-row">
+						<div class="col-12 col-md-8">
+
+							<label for="idalimento">Selecione o Alimento:</label>
+							<select name="idalimento" id="idalimento" class="form-control" 
+							required data-parsley-required-message="Selecione um alimento">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela = "alimento";
+									$id 	= "idalimento";
+									$campo  = "nomealimento";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+
+						<div class="col-12 col-md-2">
+							<input type="number" min="0" step="0.01" class="form-control" 
+							id="peso" name="peso" value="<?=$peso;?>" placeholder="Peso(gr)" 
+							required data-parsley-required-message="Informe um peso">
+						</div>
+
+						<div class="col-12 col-md-2">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/jantar.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+
+
+			<!-- Ceia -->
+			<hr>
+			<h1>Ceia</h1>
+			<hr>
+			<div id="cardapio">
+				<form name="formadd" method="post" action="salvar/ceia.php" data-parsley-validate 
+				target="iframe">
+
+				
+				<br>
+					<!-- id do quadrinho -->
+					<input type="hidden" name="idfichaanamnese" value="<?=$idfichaanamnese;?>">
+					<input type="hidden" name="dataficha" value="<?=$dataficha;?>">
+
+					<div class="form-row">
+						<div class="col-12 col-md-8">
+
+							<label for="idalimento">Selecione o Alimento:</label>
+							<select name="idalimento" id="idalimento" class="form-control" 
+							required data-parsley-required-message="Selecione um alimento">
+								<option value="">Selecione</option>
+								<?php
+									//chamar função para mostrar as opções
+									$tabela = "alimento";
+									$id 	= "idalimento";
+									$campo  = "nomealimento";
+									carregarOpcoes($tabela,$id,$campo,$pdo);
+								?>
+							</select>
+						</div>
+
+						<div class="col-12 col-md-2">
+							<input type="number" min="0" step="0.01" class="form-control" 
+							id="peso" name="peso" value="<?=$peso;?>" placeholder="Peso(gr)" 
+							required data-parsley-required-message="Informe um peso">
+						</div>
+
+						<div class="col-12 col-md-2">
+							<button type="submit" class="btn btn-success">Inserir</button>
+						</div>
+					</div>
+				</form>
+
+				<iframe name="iframe" width="100%" height="300px" src="salvar/ceia.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+			</div>
+
+
 			<?php
 				//fechando o id
 				}
 			?>
-
 
 
 	</div> <!--fim da pagina -->

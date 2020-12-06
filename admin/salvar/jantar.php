@@ -33,7 +33,7 @@
 	//salvar o registro no banco de dados
 	if ( $_POST ){
 
-        $idrefeicao = 1;
+        $idrefeicao = 5;
         $idalimento = trim ( $_POST["idalimento"] );
         $datacardapio = trim ( $_POST["dataficha"] );
         $peso = trim ( $_POST["peso"] );
@@ -99,9 +99,10 @@
             $consulta->bindValue(":carboidrato", $carboidrato1);
 			
 			if ( $consulta->execute()) {
+                $link = "";
 
-				$link = "cafedamanha.php?idfichaanamnese=$idfichaanamnese";
-				//echo $link;
+				$link = "jantar.php?idfichaanamnese=$idfichaanamnese";
+				var_dump($link);
 				sucesso("Alimento incluído",$link);
 
 			} else {
@@ -109,7 +110,7 @@
 				// $erro = $consulta->errorInfo();
 				// print_r( $erro );
 
-				$link = "cafedamanha.php?idfichaanamnese=$idfichaanamnese";
+				$link = "jantar.php?idfichaanamnese=$idfichaanamnese";
 				//echo $link;
 				sucesso("Erro ao inserir alimento",$link);
 
@@ -119,17 +120,18 @@
 
 	}
 
-	//selecionar todos os personagens deste quadrinho
-	$idrefeicao = 1;
-	$sql3 = "select c.*, date_format(c.datacardapio,'%d/%m/%Y') as datacardapio, a.nomealimento
+    //selecionar todos os personagens deste quadrinho
+    $idrefeicao = 5;
+    $sql3 = 
+        "select c.*, date_format(c.datacardapio,'%d/%m/%Y') as datacardapio, a.nomealimento
 		from pessoa p
 		left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
         left join cardapio c on (f.idfichaanamnese = c.idfichaanamnese)
         left join alimento a on (c.idalimento = a.idalimento)
 		where f.idfichaanamnese = :idfichaanamnese and idrefeicao = :idrefeicao";
 	$consulta3 = $pdo->prepare($sql3);
-	$consulta3->bindValue(":idfichaanamnese",$idfichaanamnese);
-	$consulta3->bindValue(":idrefeicao",$idrefeicao);
+    $consulta3->bindValue(":idfichaanamnese",$idfichaanamnese);
+    $consulta3->bindValue(":idrefeicao",$idrefeicao);
 	$consulta3->execute();
 
 ?>
@@ -198,7 +200,7 @@
 	function excluir(idfichaanamnese,idrefeicao,idalimento,idcardapio){
 		if ( confirm ( "Deseja mesmo excluir?" ) ){
 			//enviar para uma página para excluir
-			location.href='../excluir/cafedamanha/'+idfichaanamnese+'/'+idrefeicao+'/'+idalimento+'/'+idcardapio;
+			location.href='../excluir/jantar/'+idfichaanamnese+'/'+idrefeicao+'/'+idalimento+'/'+idcardapio;
 		}
 	}
 </script>
