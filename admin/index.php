@@ -33,7 +33,7 @@
 	<link rel="stylesheet" type="text/css" href="css/summernote-bs4.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 
-	<link rel="shortcut icon" href="images/icone.png">
+	<link rel="shortcut icon" href="images/nutrisystem_icon.png">
 
 	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="js/popper.min.js"></script>

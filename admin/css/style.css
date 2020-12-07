@@ -24,7 +24,7 @@ thead {
 }
 
 .navbar {
-    background: #212121;
+    background: #A0ACA0;
     box-shadow: 2px 2px 30px #ccc;
 }
 
@@ -38,7 +38,7 @@ thead {
 }
 
 .dropdown-menu a {
-    color: #00B0EF;
+    color: #4D644C;
 }
 
 .nav-item.menu {
@@ -114,7 +114,7 @@ footer p {
 
 .erro .erro-titulo {
     font-size: 10em;
-    color: #00B0EF;
+    color: #4D644C;
     text-align: right;
 }
 
@@ -142,7 +142,7 @@ footer p {
 
 .login h2 {
     font: 1.1em Montserrat;
-    color: #333;
+    color: #4D644C;
     font-weight: 800;
     text-transform: uppercase;
     margin-bottom: 20px;
@@ -161,9 +161,9 @@ footer p {
     width: 100%;
     padding: 10px;
     text-align: center;
-    background: #7FFF00;
+    background: #4D644C;
     color: #fff;
-    border-radius: 100px;
+    border-radius: 200px;
     border: 0;
     margin-top: 10px;
     transition: all 0.5s;

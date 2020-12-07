@@ -38,9 +38,9 @@
 		
 		<div class="float-right">
 
-			<a href="listar/pessoaFicha" class="btn btn-info">
+			<!-- <a href="listar/pessoaFicha" class="btn btn-info">
 				<i class="fas fa-search"></i> Consultar
-			</a>
+			</a> -->
 
 		</div>
 			
@@ -136,7 +136,10 @@
             $contraceptivo			= $dados->contraceptivo;
             $colica					= $dados->colica;
             $lactante				= $dados->lactante;
-            $menopausa				= $dados->menopausa;
+			$menopausa				= $dados->menopausa;
+
+			$ingestaohidricadiaria = number_format($ingestaohidricadiaria, 2, ",", ".");
+			
 		}
 	
 	?>
@@ -250,7 +253,7 @@
                 </div>
                 <div class="col-12 col-md-4">
 					<label for="ingestaohidricadiaria">Ingestão Hídrica Diária</label>
-					<input type="text" name="ingestaohidricadiaria" 
+					<input type="text" name="ingestaohidricadiaria" id="ingestaohidricadiaria"
 					class="form-control" value="<?=$ingestaohidricadiaria;?>"
 					required data-parsley-required-message="Preencha este campo" >
                 </div>				
@@ -368,7 +371,7 @@
 		});
 
 		//aplica a mascara de valor no campo
-		$("#valor").maskMoney({
+		$("#ingestaohidricadiaria").maskMoney({
 			thousands: ".",
 			decimal: ","
 		});

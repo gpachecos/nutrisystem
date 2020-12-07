@@ -78,9 +78,9 @@
 <div class="login">
 	<div class="row">
 		<div class="col-6">
-			<img src="images/login.png">
-			<h1>NutriSystem<br>
-			Sistema de Avaliação Nutricional</h1>
+			<img src="images/nutrisystem_login.png">
+			<!-- <h1>NutriSystem<br>
+			Sistema de Avaliação Nutricional</h1> -->
 		</div>
 		<div class="col-6">
 			<h2>Efetuar Login</h2>

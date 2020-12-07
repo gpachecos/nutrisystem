@@ -9,7 +9,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg fixed-top">
 	  <a class="navbar-brand" href="#">
-	  	<img src="images/schqs.png" alt="Sistema de Avaliação Nutricional" title="Sistema de Avaliação Nutricional">
+	  	<img src="images/nutrisystem_logo.png" alt="Sistema de Avaliação Nutricional" title="Sistema de Avaliação Nutricional">
 	  </a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
@@ -44,13 +44,19 @@
 		  
 		  <li class="nav-item">
 	        <a class="nav-link" href="cadastros/avaliacaoantropometrica">
-	        	<i class="fas fa-utensils"></i> Avaliação Antropométrica
+	        	<i class="fas fa-tools"></i> Avaliação Antropométrica
+	        </a>
+		  </li>
+		  
+		  <li class="nav-item">
+	        <a class="nav-link" href="cadastros/cardapio">
+	        	<i class="fas fa-utensils"></i> Cardápio
 	        </a>
 	      </li>
 
 	      <li class="nav-item">
 	        <a class="nav-link" href="cadastros/alimento">
-	        	<i class="fas fa-utensils"></i> Alimento
+	        	<i class="fas fa-apple-alt"></i> Alimento
 	        </a>
 	      </li>
 
@@ -60,7 +66,7 @@
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	          <a class="dropdown-item" href="relatorios/telaRelFicha">Ficha Anamnese</a>
-	          <a class="dropdown-item" href="relatorios/telaAvAntropometrica">Avaliação Antropométrica</a>
+	          <a class="dropdown-item" href="relatorios/telaRelAvAntropometrica">Avaliação Antropométrica</a>
 	          <a class="dropdown-item" href="relatorios/telaRelCardapio">Cardápio</a>
 	        </div>
 	      </li>

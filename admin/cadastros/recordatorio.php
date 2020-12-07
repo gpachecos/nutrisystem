@@ -47,9 +47,9 @@
 		
 		<div class="float-right">
 
-			<a href="listar/pessoaFicha" class="btn btn-info">
+			<!-- <a href="listar/pessoaFicha" class="btn btn-info">
 				<i class="fas fa-search"></i> Consultar
-			</a>
+			</a> -->
 
 		</div>
 			
@@ -115,11 +115,11 @@
 		if ( isset ( $p[2] ) ) {
 			
 			//selecionar os dados conforme o id
-			$sql = "select r.*, date_format(r.datarecordatorio,'%d/%m/%Y') as datarecordatorio, rh.*
+			$sql = "select r.*, date_format(r.datarecordatorio,'%d/%m/%Y') as datarecordatorio
 					from pessoa p
 					left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
 					left join recordatorio r on (f.idfichaanamnese = r.idfichaanamnese) 
-					left join recordatoriohora rh on (r.idrecordatorio = rh.idrecordatorio)  
+					
 					where f.idfichaanamnese = ? limit 1";
 			$consulta = $pdo->prepare( $sql );
 			$consulta->bindParam(1,$p[2]);
@@ -130,9 +130,6 @@
 			$idrecordatorio     = $dados->idrecordatorio; 
 			$datarecordatorio   = $dados->datarecordatorio; 
 			$tipodia			= $dados->tipodia;
-			$horario			= $dados->horario;
-			$alimento			= $dados->alimento;
-			$quantidade			= $dados->quantidade;
 		}
 	
 	?>
@@ -202,19 +199,19 @@
                 <div class="col-12 col-md-4">
 					<label for="horario">Horário:</label>
 					<input type="time" name="horario" id="horario"
-					class="form-control" value="<?=$horario;?>">
+					class="form-control" value="">
                 </div>
                 <br>
                 <div class="col-12 col-md-4">
 					<label for="alimento">Alimento :</label>
 					<input type="text" name="alimento" id="alimento"
-					class="form-control" value="<?=$alimento;?>">
+					class="form-control" value="">
 				</div>
             	<br>        
                 <div class="col-12 col-md-3">
 					<label for="quantidade">Quantidade :</label>
 					<input type="text" name="quantidade" id="quantidade"
-					class="form-control" value="<?=$quantidade;?>">
+					class="form-control" value="">
 				</div>
 				
 				<div class="col-12 col-md-1">
@@ -231,7 +228,7 @@
 
 		<hr> -->
 
-		<table class="table table-hover table-striped table-bordered">
+		<table class="table table-hover table-striped table-bordered" id="tabelarecordatorio">
 			<thead>
 				<tr>
 					<td width="15%">Horário</td>
@@ -240,7 +237,7 @@
 					<td>Excluir</td>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tabelainsert">
 				<?php
 					//selecionar os dados do editora
 					$sql = "select r.*, date_format(r.datarecordatorio,'%d/%m/%Y') as datarecordatorio, rh.*
@@ -321,6 +318,8 @@
 </div> <!-- fim do container -->
 
 <script type="text/javascript">
+
+
 	//funcao em javascript para perguntar se quer mesmo excluir
 	function excluir(idexame) {
 		//perguntar
@@ -385,6 +384,21 @@
 				if(result['message']) {
 					alert(result['message']);
 				}
+				
+				let  newLine = `
+						<tr>
+							<td>${result['horario']}</td>
+							<td>${result['alimento']}</td>
+							<td>${result['quantidade']}</td>
+							<td>
+								<a href='javascript:excluir(${result['idrecordatoriohora']})' class='btn btn-danger btn-sm'>
+									<i class='fas fa-trash'></i>
+								</a>
+							</td>
+						</tr>
+				`;
+				$('#tabelarecordatorio tbody tr:last').after(newLine);
+
 												
 			},
 			fail:function(err){

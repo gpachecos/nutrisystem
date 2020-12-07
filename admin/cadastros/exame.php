@@ -38,9 +38,9 @@
 		
 		<div class="float-right">
 
-			<a href="listar/pessoaFicha" class="btn btn-info">
+			<!-- <a href="listar/pessoaFicha" class="btn btn-info">
 				<i class="fas fa-search"></i> Consultar
-			</a>
+			</a> -->
 
 		</div>
 			
@@ -243,9 +243,11 @@
 		<!-- <div class="col-lg-12" style="text-align: right"> -->
 			<?php
 			echo "
+			<div class='d-flex flex-row-reverse bd-highlight'>
 			<a href='cadastros/avaliacaoclinica/$idfichaanamnese' class='btn btn-success' role='button'>
 				Salvar/Alterar
-			</a>"
+			</a>
+			</div>"
 			?>
 		<!-- </div> -->
 

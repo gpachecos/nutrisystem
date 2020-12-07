@@ -15,7 +15,7 @@
 	$senha = "";
 
 	//nome do banco de dados
-	$banco = "banco";
+	$banco = "hq";
 
 	try {
 		//criar uma conexao com PDO

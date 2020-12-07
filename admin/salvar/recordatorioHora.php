@@ -57,7 +57,8 @@
 			$sql2 = "insert into recordatoriohora 
 			(idrecordatoriohora,idrecordatorio, horario, alimento, quantidade)
 			values 
-			(NULL, :idrecordatorio, :horario, :alimento, :quantidade)";
+			(NULL, :idrecordatorio, :horario, :alimento, :quantidade);
+			";
 
 			$consulta2 = $pdo->prepare( $sql2 );
 			$consulta2->bindValue(":idrecordatorio", $idrecordatorio);
@@ -83,13 +84,25 @@
 
 		//executar
 		if ( $consulta2->execute() ) {
-			
 
+			
 			//salvar no banco
 			$pdo->commit();
 
+			$sql = "
+
+			select idrecordatoriohora,idrecordatorio, horario, alimento, quantidade 
+            from recordatoriohora where idrecordatoriohora = (select max(idrecordatoriohora) from recordatoriohora) limit 1;
+			";
+
+			$consulta3 = $pdo->prepare( $sql );
+			$consulta3->execute();
+			$dados = $consulta3->fetch(PDO::FETCH_ASSOC);
+
 			$msg = "Registro inserido com sucesso!";
-			echo json_encode(['message'=>$msg]);
+			$dados['message'] = $msg;
+			echo json_encode($dados);
+			
 			//sucesso( $msg, "cadastros/recordatorio/$idfichaanamnese" );
 
 

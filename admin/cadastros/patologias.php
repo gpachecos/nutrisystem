@@ -40,9 +40,9 @@
 		
 		<div class="float-right">
 
-			<a href="listar/pessoaFicha" class="btn btn-info">
+			<!-- <a href="listar/pessoaFicha" class="btn btn-info">
 				<i class="fas fa-search"></i> Consultar
-			</a>
+			</a> -->
 
 		</div>
 			
@@ -141,9 +141,11 @@
 
 				<br>
 				<br>
+			<div class='d-flex flex-row-reverse bd-highlight'>
 			<button onclick="window.location.href='cadastros/historicomedico/<?=$idfichaanamnese?>'" type="button" class="btn btn-success">
 				Salvar/Alterar
 			</button>
+			</div>
 
 	</div> <!--fim da pagina -->
 </div> <!-- fim do container -->

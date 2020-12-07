@@ -10,6 +10,7 @@
     
     //var_dump($p[2]);
 
+	if ( isset($p[2]) ){
 	//verificar o id - $p[2]
 	if ( isset ( $p[2] ) && ($p[2] == "") ) {
 
@@ -35,7 +36,8 @@
 		$idfichaanamnese 	= $dados->idfichaanamnese;
         $dataficha 			= $dados->dataficha;
 
-     }
+	 }
+	}
 
 ?>
 <div class="container">
@@ -44,18 +46,19 @@
 		
 		<div class="float-right">
 
-			<a href="listar/fichaanamneseAvAntro" class="btn btn-info">
-				<i class="fas fa-search"></i> Consultar
+			<a href="listar/fichaCardapio" class="btn btn-info">
+				<i class="fas fa-search"></i> Consultar Fichas
 			</a>
 
 		</div>
-			
+		
+		<br>
 		<div class="clearfix"></div>
 		
 
-		<form name="cadastro" method="post" action="salvar/avaliacaoantropometrica" data-parsley-validate enctype="multipart/form-data">
+		<form name="cadastro" method="post" action="salvar/cardapio" data-parsley-validate enctype="multipart/form-data">
 
-			
+			<br>
 			<div class="row">
 				<div class="col-12 col-md-2">
 						<label for="idpessoa">ID Pessoa:</label>  
@@ -158,7 +161,7 @@
 			<hr>
 			<div id="cardapio">
 				<form name="formadd" method="post" action="salvar/lanchemanha.php" data-parsley-validate 
-				target="iframe">
+				target="iframelanche">
 
 				
 				<br>
@@ -195,7 +198,7 @@
 					</div>
 				</form>
 
-				<iframe name="iframe" width="100%" height="300px" src="salvar/lanchemanha.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+				<iframe name="iframelanche" width="100%" height="300px" src="salvar/lanchemanha.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
 			</div>
 
 			<!-- Almoço -->
@@ -204,7 +207,7 @@
 			<hr>
 			<div id="cardapio">
 				<form name="formadd" method="post" action="salvar/almoco.php" data-parsley-validate 
-				target="iframe">
+				target="iframealmoco">
 
 				
 				<br>
@@ -241,7 +244,7 @@
 					</div>
 				</form>
 
-				<iframe name="iframe" width="100%" height="300px" src="salvar/almoco.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+				<iframe name="iframealmoco" width="100%" height="300px" src="salvar/almoco.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
 			</div>
 
 			<!-- Café da Tarde -->
@@ -250,7 +253,7 @@
 			<hr>
 			<div id="cardapio">
 				<form name="formadd" method="post" action="salvar/cafedatarde.php" data-parsley-validate 
-				target="iframe">
+				target="iframecafetarde">
 
 				
 				<br>
@@ -287,7 +290,7 @@
 					</div>
 				</form>
 
-				<iframe name="iframe" width="100%" height="300px" src="salvar/cafedatarde.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+				<iframe name="iframecafetarde" width="100%" height="300px" src="salvar/cafedatarde.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
 			</div>
 
 			<!-- Jantar -->
@@ -296,7 +299,7 @@
 			<hr>
 			<div id="cardapio">
 				<form name="formadd" method="post" action="salvar/jantar.php" data-parsley-validate 
-				target="iframe">
+				target="iframejantar">
 
 				
 				<br>
@@ -333,7 +336,7 @@
 					</div>
 				</form>
 
-				<iframe name="iframe" width="100%" height="300px" src="salvar/jantar.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+				<iframe name="iframejantar" width="100%" height="300px" src="salvar/jantar.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
 			</div>
 
 
@@ -343,7 +346,7 @@
 			<hr>
 			<div id="cardapio">
 				<form name="formadd" method="post" action="salvar/ceia.php" data-parsley-validate 
-				target="iframe">
+				target="iframeceia">
 
 				
 				<br>
@@ -380,7 +383,7 @@
 					</div>
 				</form>
 
-				<iframe name="iframe" width="100%" height="300px" src="salvar/ceia.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
+				<iframe name="iframeceia" width="100%" height="300px" src="salvar/ceia.php?idfichaanamnese=<?=$idfichaanamnese;?>"></iframe>
 			</div>
 
 

@@ -142,6 +142,10 @@
 			$exerciciofisico 		= $dados->exerciciofisico;
 			$freqexercfisico 		= $dados->freqexercfisico;
 			$tempoexercfisico 		= $dados->tempoexercfisico;
+		
+			$litrosoleo = number_format($litrosoleo, 2, ",", ".");
+			$quilossal = number_format($quilossal, 2, ",", ".");
+		
 		}
 	
 	?>
@@ -184,13 +188,13 @@
 				<div class="col-12 col-md-3">
 					<label for="ingbebidaalcool">Ingere Bebida Alcoólica:</label>
 					<select name="ingbebidaalcool" id="ingbebidaalcool"
-					class="form-control" required  data-parsley-required-message="Selecione uma Restrição">
+					class="form-control" required  data-parsley-required-message="Selecione uma Opção">
 						<option value="">Selecione</option>
 						<option value="Sim">Sim</option>
 						<option value="Não">Não</option>
 					</select>
 					<script type="text/javascript">
-						$("#ingbebidaalcool ").val('<?=$ingbebidaalcool;?>')
+						$("#ingbebidaalcool").val('<?=$ingbebidaalcool;?>')
 					</script>
 				</div>
 				<div class="col-12 col-md-9">
@@ -231,7 +235,7 @@
 			<div class="row">
 				<div class="col-12 col-md-4">
 					<label for="qdtemoradorescasa">Quantas pessoas vivem na casa?</label>
-					<input type="text" name="qdtemoradorescasa" 
+					<input type="text" name="qdtemoradorescasa" id="qdtemoradorescasa"
 					class="form-control" value="<?=$qdtemoradorescasa;?>"
 					required data-parsley-required-message="Preencha este campo">
 				</div>
@@ -259,13 +263,13 @@
 				</div>
 				<div class="col-12 col-md-4">
 					<label for="litrosoleo">Quantos litros de Óleo?</label>
-					<input type="text" name="litrosoleo" 
+					<input type="text" name="litrosoleo" id="litrosoleo"
 					class="form-control" value="<?=$litrosoleo;?>"
 					required data-parsley-required-message="Preencha este campo">
 				</div>
 				<div class="col-12 col-md-4">
-					<label for="quilossal">Quantos quilos de Sal?:</label>
-					<input type="text" name="quilossal" 
+					<label for="quilossal">Quantos quilos de Sal?</label>
+					<input type="text" name="quilossal" id="quilossal"
 					class="form-control" value="<?=$quilossal;?>"
 					required data-parsley-required-message="Preencha este campo">
 				</div>
@@ -372,7 +376,17 @@
 		});
 
 		//aplica a mascara de valor no campo
-		$("#valor").maskMoney({
+		$("#litrosoleo").maskMoney({
+			thousands: ".",
+			decimal: ","
+		});
+
+		$("#quilossal").maskMoney({
+			thousands: ".",
+			decimal: ","
+		});
+
+		$("#qdtemoradorescasa").maskMoney({
 			thousands: ".",
 			decimal: ","
 		});

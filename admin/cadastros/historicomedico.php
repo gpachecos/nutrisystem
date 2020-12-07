@@ -38,9 +38,9 @@
 		
 		<div class="float-right">
 
-			<a href="listar/pessoaFicha" class="btn btn-info">
+			<!-- <a href="listar/pessoaFicha" class="btn btn-info">
 				<i class="fas fa-search"></i> Consultar
-			</a>
+			</a> -->
 
 		</div>
 			

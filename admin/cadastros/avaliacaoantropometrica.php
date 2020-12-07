@@ -8,7 +8,7 @@
 	//inicializar as variaveis de pessoa
 	$idpessoa = $nome = $idfichaanamnese = $dataficha = "";
     
-    var_dump($p[3]);
+    //var_dump($p[2]);
 
 	if ( isset($p[2]) ){
 	//verificar o id - $p[2]
