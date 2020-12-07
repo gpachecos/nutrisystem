@@ -8,7 +8,7 @@
 	//inicializar as variaveis de pessoa
 	$idpessoa = $nome = $idfichaanamnese = $dataficha = "";
     
-    //var_dump($p[2]);
+    var_dump($p[3]);
 
 	if ( isset($p[2]) ){
 	//verificar o id - $p[2]
@@ -122,9 +122,10 @@
 					from pessoa p
 					left join fichaanamnese f  on (p.idpessoa = f.idpessoa)
 					left join avaliacaoantropometrica aa on (f.idfichaanamnese = aa.idfichaanamnese) 
-					where f.idfichaanamnese = ? limit 1";
+					where f.idfichaanamnese = ? and aa.dataavaliacao = ? limit 1";
 			$consulta = $pdo->prepare( $sql );
 			$consulta->bindParam(1,$p[2]);
+			$consulta->bindParam(2,$p[3]);
 			$consulta->execute();
 			//recuperar os dados
 			$dados = $consulta->fetch(PDO::FETCH_OBJ);

@@ -28,6 +28,7 @@
 					//selecionar os dados do editora
 					$sql = "select p.idpessoa, p.nome , f.idfichaanamnese, date_format(f.dataficha,'%d/%m/%Y') as dataficha
 							,aa.idavaliacaoantropometrica , date_format(aa.dataavaliacao,'%d/%m/%Y') as dataavaliacao
+							,aa.dataavaliacao as dataavaliacao1
 							from pessoa p 
 							left join fichaanamnese f on (p.idpessoa = f.idpessoa)
 							left join avaliacaoantropometrica aa on (f.idfichaanamnese = aa.idfichaanamnese)  
@@ -45,6 +46,7 @@
 						$dataficha 	        			= $linha->dataficha;
 						$idavaliacaoantropometrica 		= $linha->idavaliacaoantropometrica;
 						$dataavaliacao 					= $linha->dataavaliacao;
+						$dataavaliacao1 	        	= $linha->dataavaliacao1;
 
 						//montar as linhas e colunas da tabela
 						echo "<tr>
@@ -55,7 +57,7 @@
 							<td>$idavaliacaoantropometrica</td>
 							<td>$dataavaliacao</td>
 							<td>
-								<a href='cadastros/avaliacaoantropometrica/$idfichaanamnese' class='btn btn-success btn-sm'>
+								<a href='cadastros/avaliacaoantropometrica/$idfichaanamnese/$dataavaliacao1' class='btn btn-success btn-sm'>
 									<i class='fas fa-edit'></i>
 								</a>
 							</td>

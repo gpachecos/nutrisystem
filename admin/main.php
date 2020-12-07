@@ -60,8 +60,8 @@
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 	          <a class="dropdown-item" href="relatorios/telaRelFicha">Ficha Anamnese</a>
-	          <a class="dropdown-item" href="relatorios/quadrinhos"></a>
-	          <a class="dropdown-item" href="relatorio/clientes"></a>
+	          <a class="dropdown-item" href="relatorios/telaAvAntropometrica">Avaliação Antropométrica</a>
+	          <a class="dropdown-item" href="relatorios/telaRelCardapio">Cardápio</a>
 	        </div>
 	      </li>
 	    
