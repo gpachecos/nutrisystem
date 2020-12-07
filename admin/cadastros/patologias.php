@@ -6,7 +6,7 @@
 		include "../verificalogin.php";
 
 	//inicializar as variaveis de pessoa
-	$idpessoa = $nome = $idfichaanamnese = $dataficha = "";
+	$idpessoa = $nome = $idfichaanamnese = $dataficha = $outros = "";
 
 	//verificar o id - $p[2]
 	if ( isset ( $p[2] ) ) {
@@ -137,11 +137,11 @@
 			<?php
 				//fechando o id
 				}
-			?>
+			?>	
 
-			<hr>		
-
-			<button onclick="window.location.href='cadastros/habitosalimentares/<?=$idfichaanamnese?>'" type="button" class="btn btn-success">
+				<br>
+				<br>
+			<button onclick="window.location.href='cadastros/historicomedico/<?=$idfichaanamnese?>'" type="button" class="btn btn-success">
 				Salvar/Alterar
 			</button>
 

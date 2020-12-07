@@ -59,9 +59,9 @@
 	          <i class="fas fa-chart-line"></i> Relatórios
 	        </a>
 	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="relatorios/vendas">Vendas</a>
-	          <a class="dropdown-item" href="relatorios/quadrinhos">Quadrinhos</a>
-	          <a class="dropdown-item" href="relatorio/clientes">Clientes</a>
+	          <a class="dropdown-item" href="relatorios/telaRelFicha">Ficha Anamnese</a>
+	          <a class="dropdown-item" href="relatorios/quadrinhos"></a>
+	          <a class="dropdown-item" href="relatorio/clientes"></a>
 	        </div>
 	      </li>
 	    

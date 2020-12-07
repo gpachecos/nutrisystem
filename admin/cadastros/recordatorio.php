@@ -287,25 +287,27 @@
 		<br>
 		<!-- window.location.href -->
 		
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-4 col-md-10">
-				<button onclick="window.location.href='cadastros/habitosalimentares/<?=$idfichaanamnese?>'" type="button" class="btn btn-info">
-						<i class='fas fa-plus'>Anterior</i>
+				<button onclick="window.location.href='cadastros/habitosalimentares/php$idfichaanamnese?php'" type="button" class="btn btn-info">
+						<i class='fas fa-plus'>Anterior</i> -->
 						</button>
 						<!-- <button onclick="window.location.href='/page2'">Continue</button> -->
-			</div>
+			<!-- </div>
 			<div class="col col-md-2">
 				<button type="button" class="btn btn-info">
 						<i class='fas fa-plus'>Próximo</i>
 						</button></div>
-		</div>
+		</div> -->
 
 		<!-- <div class="col-lg-12" style="text-align: right"> -->
 			<?php
 			echo "
-			<a href='cadastros/avaliacaoclinica/$idfichaanamnese' class='btn btn-success' role='button'>
+			<div class='d-flex flex-row-reverse bd-highlight'>
+			<a href='cadastros/avaliacaoantropometrica/$idfichaanamnese' class='btn btn-success' role='button'>
 				Salvar/Alterar
-			</a>"
+			</a>
+			</div>"
 			?>
 		<!-- </div> -->
 

@@ -204,7 +204,7 @@
 			$pdo->commit();
 
 			$msg = "Registro inserido com sucesso!";
-			sucesso( $msg, "cadastros/historicomedico/$idfichaanamnese" );
+			sucesso( $msg, "cadastros/patologias/$idfichaanamnese" );
 
 
 		} else {
